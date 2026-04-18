@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lavender-700: #6d28d9;
+  --color-lavender-600: #7c3aed;
+  --color-mint-500: #10b981;
+  --color-mint-600: #059669;
+  --color-dark-bg: #0a0a1a;
+}
+
+:root {
+  background-color: #6a6aaf;
+  color: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #0a0a1a;
+  color: #f8fafc;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff;
+}
+
+p,
+span,
+label,
+td,
+th {
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Global Button Styles */
+.btn-enterprise {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-enterprise:active {
+  transform: scale(0.95);
+}
+
+.btn-lavender {
+  background-color: #6d28d9;
+  color: white;
+  box-shadow: 0 5px 15px rgba(109, 40, 217, 0.3);
+}
+
+.btn-lavender:hover {
+  background-color: #7c3aed;
+  box-shadow: 0 8px 20px rgba(109, 40, 217, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-mint {
+  background-color: #10b981;
+  color: white;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-mint:hover {
+  background-color: #059669;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Dashboard Card Styles */
+.card-enterprise {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.card-enterprise:hover {
+  box-shadow: 0 20px 50px rgba(109, 40, 217, 0.2);
+  border-color: rgba(109, 40, 217, 0.3);
+}
+
+.card-header-lavender {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(to right, rgba(109, 64, 217, 0.1), transparent);
+}
+
+/* 3D Special Effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+}
+
+input,
+textarea,
+select {
+  color: white;
+}
+
+/* Specific placeholder styling for visibility */
+::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* If input is inside a light container, it should be dark */
+.light-theme input,
+.light-theme textarea,
+.light-theme select {
+  color: #1e293b;
+}
+
+/* Glassmorphism utility */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
