@@ -62,7 +62,7 @@ export default function EmployeeDashboard() {
     const token = localStorage.getItem("token");
     if (!token || !user.email) return;
 
-    fetch("http://localhost:5000/api/tasks", {
+    fetch("https://ems-backend.vercel.app/api/tasks", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -97,7 +97,7 @@ export default function EmployeeDashboard() {
 
   const handleStatusChange = (id, newStatus) => {
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/api/tasks/${id}`, {
+    fetch(`https://ems-backend.vercel.app/api/tasks/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -135,14 +135,17 @@ export default function EmployeeDashboard() {
   const handleInlineSave = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/tasks/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(inlineTaskData),
         },
-        body: JSON.stringify(inlineTaskData),
-      });
+      );
       if (res.ok) {
         setEditingTaskId(null);
         const updated = tasks.map((t) =>

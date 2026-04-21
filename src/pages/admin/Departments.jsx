@@ -29,7 +29,7 @@ export default function Departments() {
 
   const fetchDepartments = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/departments");
+      const res = await fetch("https://ems-backend.vercel.app/api/departments");
       const data = await res.json();
       setDepartments(data);
       setLoading(false);
@@ -43,8 +43,8 @@ export default function Departments() {
     e.preventDefault();
     try {
       const url = isEditing
-        ? `http://localhost:5000/api/departments/${selectedId}`
-        : "http://localhost:5000/api/departments";
+        ? `https://ems-backend.vercel.app/api/departments/${selectedId}`
+        : "https://ems-backend.vercel.app/api/departments";
       const method = isEditing ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -78,9 +78,12 @@ export default function Departments() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this department?")) {
       try {
-        const res = await fetch(`http://localhost:5000/api/departments/${id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(
+          `https://ems-backend.vercel.app/api/departments/${id}`,
+          {
+            method: "DELETE",
+          },
+        );
         if (res.ok) fetchDepartments();
       } catch (err) {
         console.error("Error deleting department:", err);

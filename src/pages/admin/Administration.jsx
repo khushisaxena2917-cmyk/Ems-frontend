@@ -33,9 +33,12 @@ export default function Administration() {
   const fetchDepartments = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/departments", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://ems-backend.vercel.app/api/departments",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await res.json();
       if (Array.isArray(data)) {
         setDepartments(data);
@@ -66,7 +69,7 @@ export default function Administration() {
 
   const handleDeptSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/departments", {
+    fetch("https://ems-backend.vercel.app/api/departments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -99,7 +102,7 @@ export default function Administration() {
   const fetchEmployees = () => {
     setLoading(true);
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/api/employees", {
+    fetch("https://ems-backend.vercel.app/api/employees", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -140,7 +143,7 @@ export default function Administration() {
       role: "employee",
     };
 
-    fetch("http://localhost:5000/api/employees", {
+    fetch("https://ems-backend.vercel.app/api/employees", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

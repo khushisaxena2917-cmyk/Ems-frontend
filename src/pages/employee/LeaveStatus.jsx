@@ -10,7 +10,7 @@ const LeaveStatus = () => {
     const fetchLeaveRequests = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await fetch("http://localhost:5000/api/leaves", {
+        const res = await fetch("https://ems-backend.vercel.app/api/leaves", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -32,12 +32,14 @@ export default function AdminAttendance() {
   const fetchAttendance = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/attendance", {
-        headers: { Authorization: `Bearer ${token}` }
+      const res = await fetch("https://ems-backend.vercel.app/api/attendance", {
+        headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
       setAttendanceData(
-        Array.isArray(data) ? data.sort((a, b) => new Date(b.date) - new Date(a.date)) : [],
+        Array.isArray(data)
+          ? data.sort((a, b) => new Date(b.date) - new Date(a.date))
+          : [],
       );
       setLoading(false);
     } catch (err) {
@@ -51,12 +53,12 @@ export default function AdminAttendance() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/attendance/${selectedRecord._id}`,
+        `https://ems-backend.vercel.app/api/attendance/${selectedRecord._id}`,
         {
           method: "PUT",
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         },
@@ -79,10 +81,10 @@ export default function AdminAttendance() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/attendance/${selectedRecord._id}`,
+        `https://ems-backend.vercel.app/api/attendance/${selectedRecord._id}`,
         {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         },
       );
       if (res.ok) {

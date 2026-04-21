@@ -38,13 +38,13 @@ export default function LeavesAttendance() {
       try {
         const token = localStorage.getItem("token");
         const [leavesRes, attendanceRes, employeesRes] = await Promise.all([
-          fetch("http://localhost:5000/api/leaves", {
+          fetch("https://ems-backend.vercel.app/api/leaves", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://localhost:5000/api/attendance", {
+          fetch("https://ems-backend.vercel.app/api/attendance", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://localhost:5000/api/employees", {
+          fetch("https://ems-backend.vercel.app/api/employees", {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -68,14 +68,17 @@ export default function LeavesAttendance() {
   const handleLeaveAction = async (id, status) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/leaves/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/leaves/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status }),
         },
-        body: JSON.stringify({ status }),
-      });
+      );
 
       if (res.ok) {
         setLeaves(leaves.map((l) => (l._id === id ? { ...l, status } : l)));
@@ -92,7 +95,7 @@ export default function LeavesAttendance() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/attendance", {
+      const res = await fetch("https://ems-backend.vercel.app/api/attendance", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -49,9 +49,12 @@ export default function Employees() {
   const fetchDepartments = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/departments", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://ems-backend.vercel.app/api/departments",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await res.json();
       setDepartments(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -62,14 +65,17 @@ export default function Employees() {
   const handleInlineSave = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/employees/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/employees/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(inlineFormData),
         },
-        body: JSON.stringify(inlineFormData),
-      });
+      );
       if (res.ok) {
         setEditingId(null);
         fetchEmployees();
@@ -86,7 +92,7 @@ export default function Employees() {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/employees", {
+      const res = await fetch("https://ems-backend.vercel.app/api/employees", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -102,7 +108,7 @@ export default function Employees() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/employees", {
+      const res = await fetch("https://ems-backend.vercel.app/api/employees", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,7 +144,7 @@ export default function Employees() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/employees/${selectedEmployee._id}`,
+        `https://ems-backend.vercel.app/api/employees/${selectedEmployee._id}`,
         {
           method: "PUT",
           headers: {
@@ -166,7 +172,7 @@ export default function Employees() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/employees/${selectedEmployee._id}`,
+        `https://ems-backend.vercel.app/api/employees/${selectedEmployee._id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },

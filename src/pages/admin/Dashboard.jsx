@@ -127,16 +127,16 @@ export default function AdminDashboard() {
         setLoading(true);
         const [tasksRes, employeesRes, leavesRes, queriesRes] =
           await Promise.all([
-            fetch("http://localhost:5000/api/tasks", {
+            fetch("https://ems-backend.vercel.app/api/tasks", {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            fetch("http://localhost:5000/api/employees", {
+            fetch("https://ems-backend.vercel.app/api/employees", {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            fetch("http://localhost:5000/api/leaves", {
+            fetch("https://ems-backend.vercel.app/api/leaves", {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            fetch("http://localhost:5000/api/contact", {
+            fetch("https://ems-backend.vercel.app/api/contact", {
               headers: { Authorization: `Bearer ${token}` },
             }),
           ]);
@@ -176,14 +176,17 @@ export default function AdminDashboard() {
   const handleInlineTaskSave = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/tasks/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(inlineTaskData),
         },
-        body: JSON.stringify(inlineTaskData),
-      });
+      );
       if (res.ok) {
         setEditingTaskId(null);
         // Refresh stats and tasks

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { KeyRound, ShieldCheck, ArrowRight, Lock, Eye, EyeOff } from "lucide-react";
+import {
+  KeyRound,
+  ShieldCheck,
+  ArrowRight,
+  Lock,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import { toast, Toaster } from "sonner";
 
 export default function Settings() {
@@ -30,17 +37,20 @@ export default function Settings() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/auth/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://ems-backend.vercel.app/api/auth/change-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            oldPassword: passwords.oldPassword,
+            newPassword: passwords.newPassword,
+          }),
         },
-        body: JSON.stringify({
-          oldPassword: passwords.oldPassword,
-          newPassword: passwords.newPassword,
-        }),
-      });
+      );
 
       const data = await res.json();
       if (res.ok) {
@@ -63,7 +73,7 @@ export default function Settings() {
       className="flex flex-col gap-10"
     >
       <Toaster richColors position="top-center" />
-      
+
       <div className="flex flex-col gap-2">
         <h1 className="text-4xl font-black text-white tracking-tight flex items-center gap-4">
           <KeyRound className="w-10 h-10 text-lavender-400" />
@@ -78,15 +88,19 @@ export default function Settings() {
         <div className="lg:col-span-2">
           <div className="bg-white/5 backdrop-blur-xl rounded-[3rem] border border-white/10 p-10 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-lavender-500/5 rounded-full blur-[80px] -mr-32 -mt-32"></div>
-            
+
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-10">
                 <div className="w-12 h-12 bg-lavender-500/10 rounded-2xl flex items-center justify-center text-lavender-400 border border-lavender-500/20">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black text-white">Security Update</h2>
-                  <p className="text-slate-400 text-sm font-medium">Update your password to keep your account secure.</p>
+                  <h2 className="text-2xl font-black text-white">
+                    Security Update
+                  </h2>
+                  <p className="text-slate-400 text-sm font-medium">
+                    Update your password to keep your account secure.
+                  </p>
                 </div>
               </div>
 
@@ -112,7 +126,11 @@ export default function Settings() {
                         onClick={() => setShowOldPassword(!showOldPassword)}
                         className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors p-2"
                       >
-                        {showOldPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showOldPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -138,7 +156,11 @@ export default function Settings() {
                           onClick={() => setShowNewPassword(!showNewPassword)}
                           className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors p-2"
                         >
-                          {showNewPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                          {showNewPassword ? (
+                            <EyeOff className="w-5 h-5" />
+                          ) : (
+                            <Eye className="w-5 h-5" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -160,10 +182,16 @@ export default function Settings() {
                         />
                         <button
                           type="button"
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
                           className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors p-2"
                         >
-                          {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                          {showConfirmPassword ? (
+                            <EyeOff className="w-5 h-5" />
+                          ) : (
+                            <Eye className="w-5 h-5" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -195,25 +223,34 @@ export default function Settings() {
 
         <div className="flex flex-col gap-8">
           <div className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 p-8 shadow-xl">
-            <h3 className="text-lg font-black text-white mb-6 uppercase tracking-widest">Password Tips</h3>
+            <h3 className="text-lg font-black text-white mb-6 uppercase tracking-widest">
+              Password Tips
+            </h3>
             <ul className="flex flex-col gap-6">
               {[
                 "Use at least 6 characters",
                 "Include a mix of symbols and numbers",
                 "Avoid using common words",
-                "Change it every 3-6 months"
+                "Change it every 3-6 months",
               ].map((tip, idx) => (
-                <li key={idx} className="flex items-start gap-4 text-sm font-medium text-slate-400">
+                <li
+                  key={idx}
+                  className="flex items-start gap-4 text-sm font-medium text-slate-400"
+                >
                   <div className="w-1.5 h-1.5 rounded-full bg-lavender-500 mt-1.5 shrink-0"></div>
                   {tip}
                 </li>
               ))}
             </ul>
           </div>
-          
+
           <div className="bg-gradient-to-br from-lavender-500/10 to-indigo-500/10 backdrop-blur-xl rounded-[2.5rem] border border-lavender-500/20 p-8 shadow-xl">
-            <p className="text-xs font-black text-lavender-400 uppercase tracking-[0.2em] mb-4">Support</p>
-            <p className="text-sm font-medium text-slate-300 mb-6">Having trouble changing your password?</p>
+            <p className="text-xs font-black text-lavender-400 uppercase tracking-[0.2em] mb-4">
+              Support
+            </p>
+            <p className="text-sm font-medium text-slate-300 mb-6">
+              Having trouble changing your password?
+            </p>
             <button className="text-white font-black text-sm uppercase tracking-widest hover:text-lavender-400 transition-colors flex items-center gap-2">
               Contact IT Support
               <ArrowRight className="w-4 h-4" />

@@ -21,7 +21,7 @@ export default function AddTask() {
     const token = localStorage.getItem("token");
 
     // Fetch Employees
-    fetch("http://localhost:5000/api/employees", {
+    fetch("https://ems-backend.vercel.app/api/employees", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -29,7 +29,7 @@ export default function AddTask() {
       .catch((err) => console.error("Error fetching employees:", err));
 
     // Fetch Departments
-    fetch("http://localhost:5000/api/departments", {
+    fetch("https://ems-backend.vercel.app/api/departments", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -52,7 +52,7 @@ export default function AddTask() {
     }
 
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/api/tasks", {
+    fetch("https://ems-backend.vercel.app/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -24,7 +24,7 @@ export default function EmployeeAttendance() {
 
   const fetchAttendance = () => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/api/attendance", {
+    fetch("https://ems-backend.vercel.app/api/attendance", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -70,7 +70,7 @@ export default function EmployeeAttendance() {
         return;
       }
       // Clock In
-      fetch("http://localhost:5000/api/attendance", {
+      fetch("https://ems-backend.vercel.app/api/attendance", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,14 +95,17 @@ export default function EmployeeAttendance() {
         .catch((err) => console.error("Error clocking in:", err));
     } else {
       // Clock Out
-      fetch(`http://localhost:5000/api/attendance/${activeRecord._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      fetch(
+        `https://ems-backend.vercel.app/api/attendance/${activeRecord._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ checkOut: timeStr }),
         },
-        body: JSON.stringify({ checkOut: timeStr }),
-      })
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data?._id) {

@@ -55,7 +55,9 @@ export default function ApplyLeave() {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/departments");
+        const res = await fetch(
+          "https://ems-backend.vercel.app/api/departments",
+        );
         const data = await res.json();
         if (Array.isArray(data)) {
           setDepartments(data.map((d) => d.name));
@@ -77,7 +79,7 @@ export default function ApplyLeave() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/leaves", {
+      const res = await fetch("https://ems-backend.vercel.app/api/leaves", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

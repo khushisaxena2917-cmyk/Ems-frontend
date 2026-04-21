@@ -31,7 +31,7 @@ export default function Users() {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/users");
+      const res = await fetch("https://ems-backend.vercel.app/api/auth/users");
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
       setUsers(data);
@@ -46,8 +46,8 @@ export default function Users() {
     e.preventDefault();
     try {
       const url = isEditing
-        ? `http://localhost:5000/api/auth/users/${selectedId}`
-        : "http://localhost:5000/api/auth/register";
+        ? `https://ems-backend.vercel.app/api/auth/users/${selectedId}`
+        : "https://ems-backend.vercel.app/api/auth/register";
       const method = isEditing ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -82,9 +82,12 @@ export default function Users() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        const res = await fetch(`http://localhost:5000/api/auth/users/${id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(
+          `https://ems-backend.vercel.app/api/auth/users/${id}`,
+          {
+            method: "DELETE",
+          },
+        );
         if (res.ok) fetchUsers();
       } catch (err) {
         console.error("Error deleting user:", err);

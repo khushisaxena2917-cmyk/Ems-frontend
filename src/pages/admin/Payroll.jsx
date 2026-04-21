@@ -38,8 +38,8 @@ export default function Payroll() {
   const fetchData = async () => {
     try {
       const [payRes, empRes] = await Promise.all([
-        fetch("http://localhost:5000/api/payrolls"),
-        fetch("http://localhost:5000/api/employees"),
+        fetch("https://ems-backend.vercel.app/api/payrolls"),
+        fetch("https://ems-backend.vercel.app/api/employees"),
       ]);
       setPayrolls(await payRes.json());
       setEmployees(await empRes.json());
@@ -57,7 +57,7 @@ export default function Payroll() {
       parseFloat(formData.bonuses) -
       parseFloat(formData.deductions);
     try {
-      const res = await fetch("http://localhost:5000/api/payrolls", {
+      const res = await fetch("https://ems-backend.vercel.app/api/payrolls", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, netSalary }),
@@ -91,7 +91,7 @@ export default function Payroll() {
       parseFloat(formData.deductions);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/payrolls/${selectedPayroll._id}`,
+        `https://ems-backend.vercel.app/api/payrolls/${selectedPayroll._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -115,7 +115,7 @@ export default function Payroll() {
   const handleDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/payrolls/${selectedPayroll._id}`,
+        `https://ems-backend.vercel.app/api/payrolls/${selectedPayroll._id}`,
         {
           method: "DELETE",
         },

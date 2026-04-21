@@ -46,7 +46,7 @@ export default function EmployeeRegister() {
       return;
     }
 
-    fetch("http://localhost:5000/api/employees", {
+    fetch("https://ems-backend.vercel.app/api/employees", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

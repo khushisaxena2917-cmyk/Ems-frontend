@@ -55,9 +55,12 @@ export default function AdminSettings() {
   const fetchDepartments = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/departments", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://ems-backend.vercel.app/api/departments",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await res.json();
       setDepartments(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -70,8 +73,8 @@ export default function AdminSettings() {
     try {
       const token = localStorage.getItem("token");
       const url = editingDept
-        ? `http://localhost:5000/api/departments/${editingDept._id}`
-        : "http://localhost:5000/api/departments";
+        ? `https://ems-backend.vercel.app/api/departments/${editingDept._id}`
+        : "https://ems-backend.vercel.app/api/departments";
       const method = editingDept ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -98,10 +101,13 @@ export default function AdminSettings() {
       return;
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/departments/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/departments/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       if (res.ok) {
         fetchDepartments();
       }

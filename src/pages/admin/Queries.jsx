@@ -22,9 +22,12 @@ export default function Queries() {
     const fetchQueries = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:5000/api/contact", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          "https://ems-backend.vercel.app/api/contact",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
         const data = await response.json();
         setQueries(Array.isArray(data) ? data : []);
       } catch (error) {

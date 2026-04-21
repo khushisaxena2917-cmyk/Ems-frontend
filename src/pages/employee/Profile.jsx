@@ -42,7 +42,7 @@ export default function EmployeeProfile() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/employees/${user.id || user._id}`,
+        `https://ems-backend.vercel.app/api/employees/${user.id || user._id}`,
         {
           method: "PUT",
           headers: {

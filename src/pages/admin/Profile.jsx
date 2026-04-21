@@ -34,7 +34,7 @@ const HRProfile = () => {
           // Only fetch if we have a real ID (not demo-)
           if (userData.id && !userData.id.startsWith("demo-")) {
             const response = await axios.get(
-              `http://localhost:5000/api/auth/users/${userData.id}`,
+              `https://ems-backend.vercel.app/api/auth/users/${userData.id}`,
             );
             setUser({ ...userData, ...response.data });
           }

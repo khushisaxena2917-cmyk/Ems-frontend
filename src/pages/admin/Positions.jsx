@@ -29,8 +29,8 @@ export default function Positions() {
   const fetchData = async () => {
     try {
       const [posRes, deptRes] = await Promise.all([
-        fetch("http://localhost:5000/api/positions"),
-        fetch("http://localhost:5000/api/departments"),
+        fetch("https://ems-backend.vercel.app/api/positions"),
+        fetch("https://ems-backend.vercel.app/api/departments"),
       ]);
       setPositions(await posRes.json());
       setDepartments(await deptRes.json());
@@ -44,7 +44,7 @@ export default function Positions() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/positions", {
+      const res = await fetch("https://ems-backend.vercel.app/api/positions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

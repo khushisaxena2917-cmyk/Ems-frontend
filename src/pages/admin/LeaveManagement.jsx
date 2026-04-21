@@ -43,10 +43,10 @@ export default function LeaveManagement() {
     try {
       const token = localStorage.getItem("token");
       const [leavesRes, employeesRes] = await Promise.all([
-        fetch("http://localhost:5000/api/leaves", {
+        fetch("https://ems-backend.vercel.app/api/leaves", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/api/employees", {
+        fetch("https://ems-backend.vercel.app/api/employees", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -65,7 +65,7 @@ export default function LeaveManagement() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/leaves", {
+      const res = await fetch("https://ems-backend.vercel.app/api/leaves", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export default function LeaveManagement() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/leaves/${selectedLeave._id}`,
+        `https://ems-backend.vercel.app/api/leaves/${selectedLeave._id}`,
         {
           method: "PUT",
           headers: {
@@ -128,7 +128,7 @@ export default function LeaveManagement() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/leaves/${selectedLeave._id}`,
+        `https://ems-backend.vercel.app/api/leaves/${selectedLeave._id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -151,14 +151,17 @@ export default function LeaveManagement() {
   const handleStatusUpdate = async (id, status) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/leaves/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `https://ems-backend.vercel.app/api/leaves/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status }),
         },
-        body: JSON.stringify({ status }),
-      });
+      );
       if (res.ok) {
         fetchData();
         toast.success(`Leave request ${status.toLowerCase()} successfully!`);
